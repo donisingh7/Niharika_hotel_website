@@ -183,3 +183,62 @@ Website: contact-us page`;
     }
   });
 }
+const testimonialSlides = document.querySelectorAll(".testimonial-slide");
+const testimonialDots = document.querySelectorAll(".testimonial-dot");
+const testimonialPrev = document.getElementById("testimonialPrev");
+const testimonialNext = document.getElementById("testimonialNext");
+
+let currentTestimonial = 0;
+let testimonialInterval;
+
+function showTestimonial(index) {
+  testimonialSlides.forEach((slide) => slide.classList.remove("active"));
+  testimonialDots.forEach((dot) => dot.classList.remove("active"));
+
+  testimonialSlides[index].classList.add("active");
+  testimonialDots[index].classList.add("active");
+  currentTestimonial = index;
+}
+
+function nextTestimonial() {
+  let next = currentTestimonial + 1;
+  if (next >= testimonialSlides.length) next = 0;
+  showTestimonial(next);
+}
+
+function prevTestimonialSlide() {
+  let prev = currentTestimonial - 1;
+  if (prev < 0) prev = testimonialSlides.length - 1;
+  showTestimonial(prev);
+}
+
+function startTestimonialSlider() {
+  testimonialInterval = setInterval(nextTestimonial, 5000);
+}
+
+function resetTestimonialSlider() {
+  clearInterval(testimonialInterval);
+  startTestimonialSlider();
+}
+
+if (testimonialSlides.length > 0 && testimonialPrev && testimonialNext) {
+  testimonialPrev.addEventListener("click", () => {
+    prevTestimonialSlide();
+    resetTestimonialSlider();
+  });
+
+  testimonialNext.addEventListener("click", () => {
+    nextTestimonial();
+    resetTestimonialSlider();
+  });
+
+  testimonialDots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const index = Number(dot.getAttribute("data-testimonial"));
+      showTestimonial(index);
+      resetTestimonialSlider();
+    });
+  });
+
+  startTestimonialSlider();
+}
