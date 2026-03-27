@@ -15,6 +15,6 @@ Date: ${formData.get("date")}
 Services: ${services}
 Message: ${formData.get("message") || "NA"}`;
 
-    window.location.href = "https://wa.me/91YOURNUMBER?text=" + encodeURIComponent(msg);
+    window.location.href = "https://wa.me/917690940051?text=" + encodeURIComponent(msg);
   });
 }

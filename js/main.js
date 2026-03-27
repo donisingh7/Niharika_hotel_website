@@ -2,7 +2,8 @@ const slides = document.querySelectorAll(".slide");
 const dots = document.querySelectorAll(".dot");
 const prevSlideBtn = document.getElementById("prevSlide");
 const nextSlideBtn = document.getElementById("nextSlide");
-
+const BUSINESS_WHATSAPP = "917690940051";
+const whatsappNumber = BUSINESS_WHATSAPP;
 let currentSlide = 0;
 let slideInterval;
 
@@ -92,10 +93,9 @@ Service: ${services}
 Message: ${formData.get("message") || "NA"}`;
 
       window.open(
-        "https://wa.me/919199603225?text=" + encodeURIComponent(msg),
+        "https://wa.me/" + BUSINESS_WHATSAPP + "?text=" + encodeURIComponent(msg),
         "_blank"
       );
-
       if (successPopup) {
         successPopup.style.display = "block";
         setTimeout(() => {
@@ -140,7 +140,7 @@ if (contactBookingForm) {
       const adults = formData.get("adults");
       const msg = formData.get("message");
 
-      const whatsappNumber = "919199603225";
+      const whatsappNumber = BUSINESS_WHATSAPP;
 
       const whatsappText = `New Booking Enquiry – Niharika Bhawan Katra
 
