@@ -4,7 +4,7 @@ const prevSlideBtn = document.getElementById("prevSlide");
 const nextSlideBtn = document.getElementById("nextSlide");
 
 const BUSINESS_WHATSAPP = "917690940051";
-const GOOGLE_ADS_SEND_TO = "AW-18044706580/ZmbuCM2Uv5EcEJS-sZxD";
+const GOOGLE_ADS_SEND_TO = "AW-18049205593/cJLTCKuE-ZEcENmKxJ5D";
 
 let currentSlide = 0;
 let slideInterval;
