@@ -2,8 +2,10 @@ const slides = document.querySelectorAll(".slide");
 const dots = document.querySelectorAll(".dot");
 const prevSlideBtn = document.getElementById("prevSlide");
 const nextSlideBtn = document.getElementById("nextSlide");
+
 const BUSINESS_WHATSAPP = "917690940051";
-const whatsappNumber = BUSINESS_WHATSAPP;
+const GOOGLE_ADS_SEND_TO = "AW-18044706580/ZmbuCM2Uv5EcEJS-sZxD";
+
 let currentSlide = 0;
 let slideInterval;
 
@@ -58,6 +60,57 @@ if (slides.length > 0 && dots.length > 0 && prevSlideBtn && nextSlideBtn) {
 
   startSlider();
 }
+
+/* =========================
+   GOOGLE ADS WHATSAPP TRACKING
+   ========================= */
+
+function openTrackedWhatsApp(url) {
+  let opened = false;
+
+  const openWhatsApp = () => {
+    if (opened) return;
+    opened = true;
+    window.open(url, "_blank");
+  };
+
+  if (typeof gtag === "function") {
+    gtag("event", "conversion", {
+      send_to: GOOGLE_ADS_SEND_TO,
+      value: 1.0,
+      currency: "INR",
+      event_callback: openWhatsApp
+    });
+
+    setTimeout(openWhatsApp, 1200);
+  } else {
+    openWhatsApp();
+  }
+
+  return false;
+}
+
+function bindTrackedWhatsAppLinks() {
+  const whatsappLinks = document.querySelectorAll('a[href*="wa.me/"]');
+
+  whatsappLinks.forEach((link) => {
+    if (link.dataset.trackedWhatsapp === "true") return;
+
+    link.dataset.trackedWhatsapp = "true";
+
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      openTrackedWhatsApp(this.href);
+    });
+  });
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", bindTrackedWhatsAppLinks);
+} else {
+  bindTrackedWhatsAppLinks();
+}
+
 const bookingForm = document.getElementById("bookingForm");
 const successPopup = document.getElementById("successPopup");
 
@@ -92,10 +145,10 @@ Guests: ${formData.get("persons")}
 Service: ${services}
 Message: ${formData.get("message") || "NA"}`;
 
-      window.open(
-        "https://wa.me/" + BUSINESS_WHATSAPP + "?text=" + encodeURIComponent(msg),
-        "_blank"
+      openTrackedWhatsApp(
+        "https://wa.me/" + BUSINESS_WHATSAPP + "?text=" + encodeURIComponent(msg)
       );
+
       if (successPopup) {
         successPopup.style.display = "block";
         setTimeout(() => {
@@ -109,6 +162,7 @@ Message: ${formData.get("message") || "NA"}`;
     }
   });
 }
+
 const contactBookingForm = document.getElementById("contactBookingForm");
 const contactSuccessPopup = document.getElementById("contactSuccessPopup");
 const contactCountdown = document.getElementById("contactCountdown");
@@ -140,8 +194,6 @@ if (contactBookingForm) {
       const adults = formData.get("adults");
       const msg = formData.get("message");
 
-      const whatsappNumber = BUSINESS_WHATSAPP;
-
       const whatsappText = `New Booking Enquiry – Niharika Bhawan Katra
 
 Name: ${fname} ${lname}
@@ -155,7 +207,7 @@ ${msg}
 Website: contact-us page`;
 
       const whatsappURL =
-        "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(whatsappText);
+        "https://wa.me/" + BUSINESS_WHATSAPP + "?text=" + encodeURIComponent(whatsappText);
 
       form.reset();
 
@@ -165,7 +217,7 @@ Website: contact-us page`;
         contactCountdown.innerText = countdown;
 
         setTimeout(() => {
-          window.open(whatsappURL, "_blank");
+          openTrackedWhatsApp(whatsappURL);
         }, 1000);
 
         const timer = setInterval(() => {
@@ -183,6 +235,7 @@ Website: contact-us page`;
     }
   });
 }
+
 const testimonialSlides = document.querySelectorAll(".testimonial-slide");
 const testimonialDots = document.querySelectorAll(".testimonial-dot");
 const testimonialPrev = document.getElementById("testimonialPrev");
