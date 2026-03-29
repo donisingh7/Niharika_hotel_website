@@ -61,17 +61,17 @@ if (slides.length > 0 && dots.length > 0 && prevSlideBtn && nextSlideBtn) {
   startSlider();
 }
 
-/* =========================
-   GOOGLE ADS WHATSAPP TRACKING
-   ========================= */
+/* ===== GOOGLE ADS WHATSAPP CONVERSION TRACKING ===== */
 
-function openTrackedWhatsApp(url) {
-  let opened = false;
+function gtag_report_conversion(url) {
+  var opened = false;
 
-  const openWhatsApp = () => {
+  var callback = function () {
     if (opened) return;
     opened = true;
-    window.open(url, "_blank");
+    if (typeof url !== "undefined") {
+      window.open(url, "_blank");
+    }
   };
 
   if (typeof gtag === "function") {
@@ -79,12 +79,12 @@ function openTrackedWhatsApp(url) {
       send_to: GOOGLE_ADS_SEND_TO,
       value: 1.0,
       currency: "INR",
-      event_callback: openWhatsApp
+      event_callback: callback
     });
 
-    setTimeout(openWhatsApp, 1200);
+    setTimeout(callback, 1200);
   } else {
-    openWhatsApp();
+    callback();
   }
 
   return false;
@@ -100,7 +100,7 @@ function bindTrackedWhatsAppLinks() {
 
     link.addEventListener("click", function (e) {
       e.preventDefault();
-      openTrackedWhatsApp(this.href);
+      gtag_report_conversion(this.href);
     });
   });
 }
@@ -145,7 +145,7 @@ Guests: ${formData.get("persons")}
 Service: ${services}
 Message: ${formData.get("message") || "NA"}`;
 
-      openTrackedWhatsApp(
+      gtag_report_conversion(
         "https://wa.me/" + BUSINESS_WHATSAPP + "?text=" + encodeURIComponent(msg)
       );
 
@@ -217,7 +217,7 @@ Website: contact-us page`;
         contactCountdown.innerText = countdown;
 
         setTimeout(() => {
-          openTrackedWhatsApp(whatsappURL);
+          gtag_report_conversion(whatsappURL);
         }, 1000);
 
         const timer = setInterval(() => {
