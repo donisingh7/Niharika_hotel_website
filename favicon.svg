@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="32" fill="#1A1208"/>
+  <!-- Temple dome shape -->
+  <ellipse cx="32" cy="26" rx="14" ry="10" fill="#C8610A"/>
+  <!-- Temple spire (shikara) -->
+  <polygon points="32,8 26,26 38,26" fill="#E8832A"/>
+  <!-- Temple base -->
+  <rect x="18" y="34" width="28" height="6" rx="2" fill="#C8610A"/>
+  <!-- Temple steps -->
+  <rect x="16" y="40" width="32" height="3" rx="1" fill="#B8923A"/>
+  <rect x="14" y="43" width="36" height="3" rx="1" fill="#B8923A"/>
+  <!-- Decorative dot on spire tip -->
+  <circle cx="32" cy="8" r="2.5" fill="#B8923A"/>
+  <!-- Letter N subtle overlay -->
+  <text x="32" y="57" font-family="serif" font-size="9" font-weight="bold" fill="#E8832A" text-anchor="middle" letter-spacing="1">NB</text>
+</svg>

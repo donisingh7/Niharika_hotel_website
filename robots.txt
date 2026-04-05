@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+Disallow: /css/
+Disallow: /images/
+
 Sitemap: https://www.niharika-bhawan-stay.com/sitemap.xml
